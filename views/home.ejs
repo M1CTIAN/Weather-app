@@ -1,0 +1,29 @@
+<%- include("partials/header"); -%>
+    <ul class="nav justify-content-center" style="font-size: 3rem;">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact Me</a>
+        </li>
+    </ul>
+    <div class="container1">
+        <form action="/" method="post" class="search-container">
+            <input type="text" id="search-bar" placeholder="Enter any City name" name="cityName" autocomplete="off">
+            <a href="#"><img class="search-icon" src="https://blog.expertrec.com/search-icon-1/"></a>
+            <button type="submit" class="btn btn-primary btn-lg "
+                style="font-family: 'Raleway'; margin-left: 3rem;margin-top: 3rem;">Submit</button>
+        </form>
+    </div>
+    <div class="container1 tag">
+        <div class="jumbotron jumbotron-fluid color card">
+            <h1 class="heading card-title">What is Weather?</h1>
+            <p class="card-body centre" style="font-family: 'Raleway';">Weather is the state of the atmosphere, describing for example the degree to which it is hot
+                or cold, wet or dry, calm or stormy, clear or cloudy. On Earth, most weather phenomena occur in the
+                lowest layer of the planet's atmosphere, the troposphere,just below the stratosphere. Weather
+                refers to day-to-day temperature, precipitation, and other atmospheric conditions, whereas climate is
+                the term for the averaging of atmospheric conditions over longer periods of time. When used without
+                qualification, "weather" is generally understood to mean the weather of Earth.</p>
+        </div>
+    </div>
+    <%- include("partials/footer"); -%>

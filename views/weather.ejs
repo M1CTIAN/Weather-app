@@ -1,0 +1,17 @@
+<%- include("partials/header"); -%>
+    <div class="container1">
+        <h1 style="font-family: 'Raleway';">The temperature in <%=cityName %> is <br>
+                <%=temperature%>°C</h1>
+        <h2 style="font-family: 'Raleway';">The weather is currently <%=weatherDescription%>
+        </h2>
+        <img src="<%=weatherIcon%>" alt="weather icon">
+        <h3 style="font-family: 'Raleway';">The humidity is <%=humidity%>%</h3>
+        <h3 style="font-family: 'Raleway';">The wind speed is <%=windSpeed%> km/h</h3>
+        <h3 style="font-family: 'Raleway';">The pressure is <%=pressure%> hPa</h3>
+        <h3 style="font-family: 'Raleway';">The visibility is <%=visibility%> m</h3>
+        <h3 style="font-family: 'Raleway'; padding-bottom: 4%;">The cloud cover is <%=cloudcover%>%</h3>
+
+        <button class="btn btn-primary btn-lg" onclick="history.back()">Back</button> 
+
+    </div>
+    <%- include("partials/footer"); -%>

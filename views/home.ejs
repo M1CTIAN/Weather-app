@@ -1,29 +1,171 @@
 <%- include("partials/header"); -%>
-    <ul class="nav justify-content-center" style="font-size: 3rem;">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Contact Me</a>
-        </li>
-    </ul>
-    <div class="container1">
-        <form action="/" method="post" class="search-container">
-            <input type="text" id="search-bar" placeholder="Enter any City name" name="cityName" autocomplete="off">
-            <a href="#"><img class="search-icon" src="https://blog.expertrec.com/search-icon-1/"></a>
-            <button type="submit" class="btn btn-primary btn-lg "
-                style="font-family: 'Raleway'; margin-left: 3rem;margin-top: 3rem;">Submit</button>
-        </form>
-    </div>
-    <div class="container1 tag">
-        <div class="jumbotron jumbotron-fluid color card">
-            <h1 class="heading card-title">What is Weather?</h1>
-            <p class="card-body centre" style="font-family: 'Raleway';">Weather is the state of the atmosphere, describing for example the degree to which it is hot
-                or cold, wet or dry, calm or stormy, clear or cloudy. On Earth, most weather phenomena occur in the
-                lowest layer of the planet's atmosphere, the troposphere,just below the stratosphere. Weather
-                refers to day-to-day temperature, precipitation, and other atmospheric conditions, whereas climate is
-                the term for the averaging of atmospheric conditions over longer periods of time. When used without
-                qualification, "weather" is generally understood to mean the weather of Earth.</p>
+
+<main class="flex-grow flex flex-col justify-center items-center px-4 relative">
+    
+    <!-- Error Message -->
+    <% if (locals.error) { %>
+        <div class="absolute top-24 left-1/2 transform -translate-x-1/2 bg-red-50 text-red-900 px-6 py-3 rounded-full text-sm border border-red-100 animate-fade-in-down">
+            <%= error %>
         </div>
+    <% } %>
+
+    <div class="w-full max-w-4xl mx-auto text-center space-y-12">
+        
+        <!-- Massive Editorial Heading -->
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-serif italic text-stone-900 leading-tight opacity-0 translate-y-10" id="main-title">
+            Weather <br> <span class="not-italic font-normal">Forecast</span>
+        </h1>
+
+        <!-- Minimal Search Input -->
+        <div class="relative w-full max-w-lg mx-auto opacity-0 translate-y-10 z-50" id="search-section">
+            <form action="/" method="post" class="relative group" autocomplete="off">
+                <input type="text" 
+                       id="search-bar" 
+                       name="cityName" 
+                       placeholder="Search for a city..." 
+                       required
+                       class="w-full bg-transparent border-b border-stone-300 py-4 text-xl md:text-2xl text-center focus:outline-none focus:border-stone-900 transition-colors placeholder-stone-400 font-serif italic">
+                
+                <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <i class="fas fa-arrow-right text-stone-400 hover:text-stone-900 text-xl"></i>
+                </button>
+
+                <!-- Suggestions Dropdown -->
+                <div id="suggestions-box" class="absolute top-full left-0 w-full bg-stone-50 mt-2 shadow-2xl border border-stone-200 hidden z-[100] text-left">
+                    <!-- Populated by JS -->
+                </div>
+            </form>
+        </div>
+
+        <!-- Popular Cities (Minimal Chips) -->
+        <div class="flex flex-wrap justify-center gap-4 opacity-0 translate-y-10" id="popular-cities">
+            <% ['London', 'New York', 'Tokyo', 'Paris'].forEach(city => { %>
+                <form action="/" method="post" class="inline">
+                    <input type="hidden" name="cityName" value="<%= city %>">
+                    <button type="submit" class="text-xs uppercase tracking-widest text-stone-500 hover:text-stone-900 transition-colors border border-transparent hover:border-stone-200 px-4 py-2 rounded-full">
+                        <%= city %>
+                    </button>
+                </form>
+            <% }) %>
+        </div>
+
+        <!-- Minimal Fact Slider (Replaces Carousel) -->
+        <div class="mt-24 opacity-0" id="fact-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-stone-400 mb-4">Did you know?</p>
+            <div class="h-24 relative overflow-hidden max-w-xl mx-auto">
+                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
+                    "A bolt of lightning is five times hotter than the surface of the sun."
+                </p>
+                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
+                    "Antarctica is the driest, windiest, and coldest continent on Earth."
+                </p>
+                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
+                    "Raindrops can fall at speeds of up to 22 miles per hour."
+                </p>
+            </div>
+        </div>
+
     </div>
-    <%- include("partials/footer"); -%>
+</main>
+
+<script>
+    // GSAP Entry Animations
+    document.addEventListener('DOMContentLoaded', () => {
+        const tl = gsap.timeline();
+        
+        tl.to("#main-title", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" })
+          .to("#search-section", { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
+          .to("#popular-cities", { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
+          .to("#fact-section", { opacity: 1, duration: 1.5 }, "-=0.5");
+
+        // Fact Rotator
+        const facts = document.querySelectorAll('.fact-text');
+        let currentFact = 0;
+        
+        // Show first fact
+        gsap.to(facts[0], { opacity: 1, y: 0 });
+
+        function rotateFacts() {
+            gsap.to(facts[currentFact], { 
+                opacity: 0, 
+                y: -20, 
+                duration: 0.5,
+                onComplete: () => {
+                    // Move to next fact
+                    currentFact = (currentFact + 1) % facts.length;
+                    
+                    // Animate in
+                    gsap.fromTo(facts[currentFact], 
+                        { opacity: 0, y: 20 }, 
+                        { 
+                            opacity: 1, 
+                            y: 0, 
+                            duration: 0.5,
+                            onComplete: () => {
+                                // Schedule next rotation
+                                gsap.delayedCall(4, rotateFacts);
+                            }
+                        }
+                    );
+                }
+            });
+        }
+
+        // Start rotation loop
+        gsap.delayedCall(4, rotateFacts);
+    });
+
+    // Search Suggestions Logic
+    const searchInput = document.getElementById('search-bar');
+    const suggestionsBox = document.getElementById('suggestions-box');
+    const searchForm = document.querySelector('form');
+    
+    searchInput.addEventListener('input', debounce(async function(e) {
+        const query = e.target.value;
+        if(query.length < 3) {
+            suggestionsBox.style.display = 'none';
+            return;
+        }
+        
+        try {
+            const res = await fetch(`/suggest?q=${query}`);
+            const cities = await res.json();
+            
+            suggestionsBox.innerHTML = '';
+            if (cities.length > 0) {
+                suggestionsBox.style.display = 'block';
+                cities.forEach(city => {
+                    const div = document.createElement('div');
+                    div.className = 'p-4 hover:bg-stone-50 cursor-pointer text-stone-600 font-sans text-sm transition-colors border-b border-stone-50 last:border-0';
+                    div.textContent = city;
+                    div.addEventListener('click', function() {
+                        searchInput.value = city;
+                        suggestionsBox.style.display = 'none';
+                        searchForm.submit();
+                    });
+                    suggestionsBox.appendChild(div);
+                });
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
+        } catch(err) {
+            console.error(err);
+        }
+    }, 300));
+
+    document.addEventListener('click', function(e) {
+        if (!searchForm.contains(e.target)) {
+            suggestionsBox.style.display = 'none';
+        }
+    });
+
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+</script>
+
+<%- include("partials/footer"); -%>

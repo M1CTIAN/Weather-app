@@ -1,146 +1,30 @@
-.right {
-    position: relative;
-    text-align: right;
-}
-
-.main {
-    background-color: #CBF1F5;
-}
-
-.centre {
-    position: relative;
-    text-align: center;
-}
-
-.line {
-    display: inline-block;
-    width: 100%;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    background-color: white;
-    width: 100%;
-}
-
-.lottie {
-    width: 100px;
-    height: 100px;
-    margin-left: 10px;
-}
-
-.heading {
-    font-size: 8rem;
-    font-weight: bold;
-    font-family: 'Raleway', sans-serif;
-}
-
-.black {
-    color: black;
-}
-
-.container1 {
-    align-items: center;
-    text-align: center;
-    background-color: #CBF1F5;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-
-}
+/* 
+   Minimal Reset 
+   Most styles are now handled by Tailwind CSS classes in the HTML.
+   This file is kept for any specific custom overrides if needed.
+*/
 
 body {
-    padding-top: 75px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.search-container {
-    width: 40%;
-    display: block;
-    margin: 0 auto;
-    position: relative;
+/* Custom Scrollbar for Webkit */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
 
-input#search-bar {
-    margin: 0 auto;
-    width: 100%;
-    height: 60px;
-    padding: 0 20px;
-    font-size: 1.8rem;
-    border: none;
-    border-radius: 50px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.25s ease;
-    font-family: 'Raleway', sans-serif;
-    outline: none;
-
-    &:focus {
-        &::-webkit-input-placeholder {
-            transition: opacity 0.45s ease;
-            opacity: 0;
-        }
-
-        &::-moz-placeholder {
-            transition: opacity 0.45s ease;
-            opacity: 0;
-        }
-
-        &:-ms-placeholder {
-            transition: opacity 0.45s ease;
-            opacity: 0;
-        }
-    }
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-.search-icon {
-    position: relative;
-    float: right;
-    width: 75px;
-    height: 75px;
-    top: -68px;
+::-webkit-scrollbar-thumb {
+    background: #e7e5e4; /* stone-200 */
+    border-radius: 3px;
 }
 
-.card {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a29e; /* stone-400 */
 }
 
-.color {
-    background-color: #A6E3E9;
-}
-
-
-body {
-    animation: fadeInAnimation ease 2.5s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-a {
-    color: #000000;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.centre {
-    position: relative;
-    text-align: center;
-    padding-left: 10rem;
-    padding-right: 10rem;
-    font-size: 2rem;
-}

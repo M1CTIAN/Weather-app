@@ -1,17 +1,82 @@
 <%- include("partials/header"); -%>
-    <div class="container1">
-        <h1 style="font-family: 'Raleway';">The temperature in <%=cityName %> is <br>
-                <%=temperature%>°C</h1>
-        <h2 style="font-family: 'Raleway';">The weather is currently <%=weatherDescription%>
-        </h2>
-        <img src="<%=weatherIcon%>" alt="weather icon">
-        <h3 style="font-family: 'Raleway';">The humidity is <%=humidity%>%</h3>
-        <h3 style="font-family: 'Raleway';">The wind speed is <%=windSpeed%> km/h</h3>
-        <h3 style="font-family: 'Raleway';">The pressure is <%=pressure%> hPa</h3>
-        <h3 style="font-family: 'Raleway';">The visibility is <%=visibility%> m</h3>
-        <h3 style="font-family: 'Raleway'; padding-bottom: 4%;">The cloud cover is <%=cloudcover%>%</h3>
 
-        <button class="btn btn-primary btn-lg" onclick="history.back()">Back</button> 
+<main class="flex-grow flex flex-col px-4 md:px-12 py-12 relative">
+    
+    <!-- Back Button (Minimal) -->
+    <button onclick="window.location.href='/'" class="absolute top-8 left-8 md:left-12 text-stone-400 hover:text-stone-900 transition-colors z-10">
+        <i class="fas fa-arrow-left text-xl"></i>
+    </button>
+
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+        
+        <!-- Left Column: Main Weather -->
+        <div class="lg:col-span-5 flex flex-col justify-between h-full space-y-12 opacity-0 translate-y-10" id="weather-main">
+            <div>
+                <h1 class="text-5xl md:text-7xl font-serif text-stone-900 leading-none mb-2">
+                    <%= current.cityName %>
+                </h1>
+                <p class="text-lg text-stone-500 font-sans capitalize"><%= current.weatherDescription %></p>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <span class="text-8xl md:text-9xl font-serif text-stone-900 leading-none tracking-tighter">
+                    <%= Math.round(current.temperature) %>°
+                </span>
+                <img src="<%= current.weatherIcon %>" alt="icon" class="w-24 h-24 opacity-80 grayscale contrast-125">
+            </div>
+
+            <div class="grid grid-cols-2 gap-8 border-t border-stone-200 pt-8">
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-stone-400 mb-1">Humidity</p>
+                    <p class="text-xl font-medium text-stone-800"><%= current.humidity %>%</p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-stone-400 mb-1">Wind</p>
+                    <p class="text-xl font-medium text-stone-800"><%= current.windSpeed %> <span class="text-sm text-stone-400">km/h</span></p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-stone-400 mb-1">Pressure</p>
+                    <p class="text-xl font-medium text-stone-800"><%= current.pressure %> <span class="text-sm text-stone-400">hPa</span></p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-stone-400 mb-1">Visibility</p>
+                    <p class="text-xl font-medium text-stone-800"><%= current.visibility / 1000 %> <span class="text-sm text-stone-400">km</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Forecast -->
+        <div class="lg:col-span-7 flex flex-col justify-end opacity-0 translate-y-10" id="weather-forecast">
+            <h3 class="text-xs uppercase tracking-[0.2em] text-stone-400 mb-8">5-Day Forecast</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <% forecast.forEach(function(day, index) { %>
+                    <div class="group p-6 border border-stone-100 hover:border-stone-300 hover:bg-white transition-all duration-500 cursor-default flex flex-col items-center justify-center text-center aspect-[3/4]">
+                        <p class="text-xs uppercase tracking-widest text-stone-400 mb-4">
+                            <%= new Date(day.dt * 1000).toLocaleDateString('en-US', { weekday: 'short' }) %>
+                        </p>
+                        <img src="https://openweathermap.org/img/w/<%= day.weather[0].icon %>.png" alt="icon" class="w-12 h-12 mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+                        <p class="text-2xl font-serif text-stone-800 mb-1">
+                            <%= Math.round(day.main.temp) %>°
+                        </p>
+                        <p class="text-[10px] uppercase tracking-wider text-stone-400">
+                            <%= day.weather[0].main %>
+                        </p>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
 
     </div>
-    <%- include("partials/footer"); -%>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tl = gsap.timeline();
+        
+        tl.to("#weather-main", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" })
+          .to("#weather-forecast", { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }, "-=0.8");
+    });
+</script>
+
+<%- include("partials/footer"); -%>

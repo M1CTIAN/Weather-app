@@ -15,6 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -25,7 +26,9 @@
                         stone: {
                             50: '#fafaf9',
                             100: '#f5f5f4',
+                            800: '#292524',
                             900: '#1c1917',
+                            950: '#0c0a09',
                         }
                     }
                 }
@@ -38,17 +41,40 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="/css/styles.css" rel="stylesheet">
+    
+    <script>
+        // Dark Mode Logic
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
 </head>
 
-<body class="bg-stone-50 text-stone-900 min-h-screen flex flex-col selection:bg-stone-900 selection:text-white overflow-x-hidden">
+<body class="bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100 min-h-screen flex flex-col selection:bg-stone-900 selection:text-white dark:selection:bg-stone-100 dark:selection:text-stone-900 overflow-x-hidden transition-colors duration-500">
     
     <!-- Minimal Navigation -->
     <nav class="w-full px-8 py-8 flex justify-between items-center z-50 relative">
         <a href="/" class="text-sm tracking-[0.2em] uppercase font-medium hover:opacity-50 transition-opacity duration-300">
             Weather App &copy;25
         </a>
-        <div class="flex gap-8">
+        <div class="flex items-center gap-8">
             <a href="/" class="text-sm font-medium hover:line-through decoration-1 transition-all">Search</a>
             <a href="/about" class="text-sm font-medium hover:line-through decoration-1 transition-all">About</a>
+            <button onclick="toggleDarkMode()" class="text-sm font-medium hover:opacity-50 transition-opacity focus:outline-none">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
         </div>
     </nav>

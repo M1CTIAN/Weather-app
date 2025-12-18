@@ -3,6 +3,8 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
+require('dotenv').config();
+
 const app = express();
 const port = 3001;
 
@@ -10,7 +12,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const apiKey = "62170b4b7f20f0ea9db24340d69a7777";
+const apiKey = process.env.OPENWEATHER_API_KEY;
 
 app.get("/", function (req, res) {
     res.render("home");

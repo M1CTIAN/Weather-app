@@ -12,7 +12,7 @@
     <div class="w-full max-w-4xl mx-auto text-center space-y-12">
         
         <!-- Massive Editorial Heading -->
-        <h1 class="text-6xl md:text-8xl lg:text-9xl font-serif italic text-stone-900 leading-tight opacity-0 translate-y-10" id="main-title">
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-serif italic text-stone-900 dark:text-stone-100 leading-tight opacity-0 translate-y-10" id="main-title">
             Weather <br> <span class="not-italic font-normal">Forecast</span>
         </h1>
 
@@ -24,14 +24,14 @@
                        name="cityName" 
                        placeholder="Search for a city..." 
                        required
-                       class="w-full bg-transparent border-b border-stone-300 py-4 text-xl md:text-2xl text-center focus:outline-none focus:border-stone-900 transition-colors placeholder-stone-400 font-serif italic">
+                       class="w-full bg-transparent border-b border-stone-300 dark:border-stone-700 py-4 text-xl md:text-2xl text-center focus:outline-none focus:border-stone-900 dark:focus:border-stone-100 transition-colors placeholder-stone-400 dark:placeholder-stone-600 font-serif italic text-stone-900 dark:text-stone-100">
                 
                 <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <i class="fas fa-arrow-right text-stone-400 hover:text-stone-900 text-xl"></i>
+                    <i class="fas fa-arrow-right text-stone-400 dark:text-stone-600 hover:text-stone-900 dark:hover:text-stone-100 text-xl"></i>
                 </button>
 
                 <!-- Suggestions Dropdown -->
-                <div id="suggestions-box" class="absolute top-full left-0 w-full bg-stone-50 mt-2 shadow-2xl border border-stone-200 hidden z-[100] text-left">
+                <div id="suggestions-box" class="absolute top-full left-0 w-full bg-stone-50 dark:bg-stone-900 mt-2 shadow-2xl border border-stone-200 dark:border-stone-800 hidden z-[100] text-left">
                     <!-- Populated by JS -->
                 </div>
             </form>
@@ -42,7 +42,7 @@
             <% ['London', 'New York', 'Tokyo', 'Paris'].forEach(city => { %>
                 <form action="/" method="post" class="inline">
                     <input type="hidden" name="cityName" value="<%= city %>">
-                    <button type="submit" class="text-xs uppercase tracking-widest text-stone-500 hover:text-stone-900 transition-colors border border-transparent hover:border-stone-200 px-4 py-2 rounded-full">
+                    <button type="submit" class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 transition-colors border border-transparent hover:border-stone-200 dark:hover:border-stone-800 px-4 py-2 rounded-full">
                         <%= city %>
                     </button>
                 </form>
@@ -51,15 +51,15 @@
 
         <!-- Minimal Fact Slider (Replaces Carousel) -->
         <div class="mt-24 opacity-0" id="fact-section">
-            <p class="text-xs uppercase tracking-[0.2em] text-stone-400 mb-4">Did you know?</p>
+            <p class="text-xs uppercase tracking-[0.2em] text-stone-400 dark:text-stone-600 mb-4">Did you know?</p>
             <div class="h-24 relative overflow-hidden max-w-xl mx-auto">
-                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
+                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 dark:text-stone-400 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
                     "A bolt of lightning is five times hotter than the surface of the sun."
                 </p>
-                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
+                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 dark:text-stone-400 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
                     "Antarctica is the driest, windiest, and coldest continent on Earth."
                 </p>
-                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
+                <p class="fact-text absolute w-full text-lg md:text-xl font-serif text-stone-600 dark:text-stone-400 leading-relaxed transition-all duration-1000 opacity-0 translate-y-4">
                     "Raindrops can fall at speeds of up to 22 miles per hour."
                 </p>
             </div>
@@ -136,7 +136,7 @@
                 suggestionsBox.style.display = 'block';
                 cities.forEach(city => {
                     const div = document.createElement('div');
-                    div.className = 'p-4 hover:bg-stone-50 cursor-pointer text-stone-600 font-sans text-sm transition-colors border-b border-stone-50 last:border-0';
+                    div.className = 'p-4 hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer text-stone-600 dark:text-stone-300 font-sans text-sm transition-colors border-b border-stone-50 dark:border-stone-800 last:border-0';
                     div.textContent = city;
                     div.addEventListener('click', function() {
                         searchInput.value = city;

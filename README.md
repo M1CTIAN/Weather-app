@@ -2,8 +2,8 @@
 
 A minimalist, high-end weather application designed with an editorial aesthetic. Built with Node.js, Express, and Tailwind CSS, featuring smooth GSAP animations and real-time data from OpenWeatherMap.
 
-![Home Page Screenshot](path/to/screenshot1.png)
-*Caption: The minimal landing page with search and daily facts.*
+<img width="1919" height="1065" alt="image" src="https://github.com/user-attachments/assets/d4cf51e4-9e63-4f63-b146-5899780917cc" />
+*The minimal landing page with search and daily facts.*
 
 ## ✨ Features
 
@@ -19,8 +19,8 @@ A minimalist, high-end weather application designed with an editorial aesthetic.
 
 | Landing Page | Weather Details |
 |:---:|:---:|
-| ![Landing Page](path/to/screenshot2.png) | ![Weather Details](path/to/screenshot3.png) |
-| *Search Interface* | *Current Weather & Forecast* |
+| <img width="1919" height="1065" alt="image" src="https://github.com/user-attachments/assets/4c9d81f4-8630-4313-a7d6-e406f05a1f6b" />| <img width="1919" height="1061" alt="image" src="https://github.com/user-attachments/assets/6557983e-03c6-42c8-b9a3-433fec8f9c57" />|
+| *About Interface* | *Current Weather & Forecast* |
 
 ## 🛠️ Tech Stack
 
